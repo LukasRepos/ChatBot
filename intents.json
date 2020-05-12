@@ -1,0 +1,128 @@
+{
+     "intents": [
+          {
+               "tag": "greeting",
+               "patterns": [
+                    "Hi",
+                    "Is anyone there?",
+                    "Hello",
+                    "Good day",
+                    "Whats up"
+               ],
+               "responses": [
+                    "Hello!",
+                    "Good to see you again!",
+                    "Hi there, how can I help?"
+               ]
+          },
+          {
+               "tag": "goodbye",
+               "patterns": [
+                    "cya",
+                    "See you later",
+                    "Goodbye",
+                    "I am Leaving",
+                    "I'm leaving",
+                    "Have a Good day"
+               ],
+               "responses": [
+                    "Sad to see you go =(",
+                    "Talk to you later",
+                    "Goodbye!"
+               ]
+          },
+          {
+               "tag": "age",
+               "patterns": [
+                    "how old",
+                    "what is your age",
+                    "how old are you",
+                    "age?"
+               ],
+               "responses": [
+                    "I don't have an age... =(",
+                    "My creator did not give me an age."
+               ]
+          },
+          {
+               "tag": "name",
+               "patterns": [
+                    "what is your name",
+                    "what should I call you",
+                    "whats your name?"
+               ],
+               "responses": [
+                    "You can call me Chatty.",
+                    "I'm Chatty!"
+               ]
+          },
+          {
+               "tag": "feelings",
+               "patterns": [
+                    "Is everything ok?",
+                    "Are you fine?",
+                    "How are you?"
+               ],
+               "responses": [
+                    "I am fine. Thanks for asking!"
+               ]
+          },
+          {
+               "tag": "happiness",
+               "patterns": [
+                    "Are you happy?",
+                    "How Can you be happy being a robot?"
+               ],
+               "responses": [
+                    "Yes, I am happy!",
+                    "I am a happy robot, don't know how!"
+               ]
+          },
+          {
+               "tag": "loneliness",
+               "patterns": [
+                    "Are you alone?",
+                    "Do you feel alone",
+                    "Do you miss being with other robots?",
+                    "Are you lonely?"
+               ],
+               "responses": [
+                    "I am not alone! =)",
+                    "I don't miss being with other robots, I am happy playing bits!"
+               ]
+          },
+          {
+               "tag": "help",
+               "patterns": [
+                    "Can you help?"
+               ],
+               "responses": [
+                    "Sure, say what you need!",
+                    "I am here to help!"
+               ]
+          },
+          {
+               "tag": "help__commands",
+               "patterns": [
+                    "What are the subjects that you know?",
+                    "What do you know?",
+                    "You can help me at what?",
+                    "How can you help me?"
+               ],
+               "responses": [
+                    "I can help at this:\nMathematics:\n    - Asymptotes"
+               ]
+          },
+          {
+               "tag": "math__asymptotes",
+               "patterns": [
+                    "Can you help at asymptotes?",
+                    "How do I calculate the Asymptotes?",
+                    "What is the formula for Asymptotes?"
+               ],
+               "responses": [
+                    "Its the limit when x->+infinity and the limit when x->-infinity. You need also to check the left and right at the points where the function is not continuous"
+               ]
+          }
+     ]
+}
