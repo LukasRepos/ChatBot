@@ -64,14 +64,14 @@ processedData.forEach(data => {
 });
 
 if (process.env.NODE_ENV == 'production') {
-     net.train(trainingData, {
+     net.trainAsync(trainingData, {
           log: true,
           logPeriod: 5000,
           iterations: 2000000,
           errorThresh: 0.00005,
      });
 } else {
-     net.train(trainingData, {
+     net.trainAsync(trainingData, {
           log: true,
           logPeriod: 5000,
           iterations: 20000,
