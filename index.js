@@ -63,13 +63,21 @@ processedData.forEach(data => {
      });
 });
 
-net.train(trainingData,
-     {
+if (process.env.NODE_ENV == 'production') {
+     net.train(trainingData, {
           log: true,
           logPeriod: 5000,
-          iterations: 20000,//2000000,
+          iterations: 2000000,
           errorThresh: 0.00005,
      });
+} else {
+     net.train(trainingData, {
+          log: true,
+          logPeriod: 5000,
+          iterations: 20000,
+          errorThresh: 0.00005,
+     });
+}
 
 const server = http.createServer((request, response) => {
      let body = '';
@@ -82,14 +90,13 @@ const server = http.createServer((request, response) => {
           if (body !== '') {
                let processedBody = stemmer.tokenizeAndStem(body);
                let input = new Array(bagOfWords.length).fill(0);
-     
+
                processedBody.forEach(word => {
-                    if (bagOfWords.indexOf(word) >= 0)
-                    {
+                    if (bagOfWords.indexOf(word) >= 0) {
                          input[bagOfWords.indexOf(word)] = 1;
                     }
                });
-     
+
                let netResult = net.run(input);
                let max = 0;
                for (let i = 0; i < bagOfWords.length; i++) {
@@ -97,7 +104,7 @@ const server = http.createServer((request, response) => {
                          max = i;
                     }
                }
-               
+
                processedData.forEach(data => {
                     if (data.tag == bagOfTags[max]) {
                          response.write(data.responses[Math.floor(Math.random() * data.responses.length)]);
