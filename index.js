@@ -79,30 +79,32 @@ const server = http.createServer((request, response) => {
 
      request.on("end", () => {
           response.writeHead(200, { "Content-Type": "text/plain" });
-          let processedBody = stemmer.tokenizeAndStem(body);
-          let input = new Array(bagOfWords.length).fill(0);
-
-          processedBody.forEach(word => {
-               if (bagOfWords.indexOf(word) >= 0)
-               {
-                    input[bagOfWords.indexOf(word)] = 1;
+          if (body !== '') {
+               let processedBody = stemmer.tokenizeAndStem(body);
+               let input = new Array(bagOfWords.length).fill(0);
+     
+               processedBody.forEach(word => {
+                    if (bagOfWords.indexOf(word) >= 0)
+                    {
+                         input[bagOfWords.indexOf(word)] = 1;
+                    }
+               });
+     
+               let netResult = net.run(input);
+               let max = 0;
+               for (let i = 0; i < bagOfWords.length; i++) {
+                    if (netResult[i] > netResult[max]) {
+                         max = i;
+                    }
                }
-          });
-
-          let netResult = net.run(input);
-          let max = 0;
-          for (let i = 0; i < bagOfWords.length; i++) {
-               if (netResult[i] > netResult[max]) {
-                    max = i;
-               }
+               
+               processedData.forEach(data => {
+                    if (data.tag == bagOfTags[max]) {
+                         response.write(data.responses[Math.floor(Math.random() * data.responses.length)]);
+                         return;
+                    }
+               });
           }
-          
-          processedData.forEach(data => {
-               if (data.tag == bagOfTags[max]) {
-                    response.write(data.responses[Math.floor(Math.random() * data.responses.length)]);
-                    return;
-               }
-          });
           response.end('');
      });
 });
