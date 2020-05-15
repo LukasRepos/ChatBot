@@ -1,5 +1,4 @@
 const brain = require('brain.js');
-const net = new brain.NeuralNetwork();
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
@@ -46,38 +45,12 @@ processedData.forEach(data => {
      }
 });
 
-// creates the training data
-let trainingData = [];
-processedData.forEach(data => {
-     data.patterns.forEach(pattern => {
-          input = new Array(bagOfWords.length).fill(0);
-          output = new Array(bagOfTags.length).fill(0);
-          output[bagOfTags.indexOf(data.tag)] = 1;
-          pattern.forEach(word => {
-               input[bagOfWords.indexOf(word)] = 1;
-          });
-          trainingData.push({
-               input,
-               output
-          });
-     });
+const net = new brain.NeuralNetwork({
+     hiddenLayers: [ Math.trunc((bagOfTags.length + bagOfWords.length) / 2) ],
+     activation: 'sigmoid'
 });
 
-if (process.env.NODE_ENV == 'production') {
-     net.trainAsync(trainingData, {
-          log: true,
-          logPeriod: 5000,
-          iterations: 2000000,
-          errorThresh: 0.00005,
-     });
-} else {
-     net.trainAsync(trainingData, {
-          log: true,
-          logPeriod: 5000,
-          iterations: 20000,
-          errorThresh: 0.00005,
-     });
-}
+net.fromJSON(JSON.parse(fs.readFileSync(path.resolve("./model.json"), "utf8")));
 
 const server = http.createServer((request, response) => {
      let body = '';
@@ -105,15 +78,21 @@ const server = http.createServer((request, response) => {
                     }
                }
 
-               processedData.forEach(data => {
-                    if (data.tag == bagOfTags[max]) {
-                         response.write(data.responses[Math.floor(Math.random() * data.responses.length)]);
-                         return;
-                    }
-               });
+               console.log(netResult);
+               if (netResult[max] > 0.75) {
+                    processedData.forEach(data => {
+                         if (data.tag == bagOfTags[max]) {
+                              response.write(data.responses[Math.floor(Math.random() * data.responses.length)]);
+                              return;
+                         }
+                    });
+               } else {
+                    response.write("I didn't understand...");
+               }
+
           }
           response.end('');
      });
 });
 
-server.listen(process.env.PORT);
+server.listen(process.env.PORT || 5000);
