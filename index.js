@@ -84,7 +84,12 @@ const server = http.createServer((request, response) => {
                          if (data.tag == bagOfTags[max]) {
                               console.log("Choosed: " + max);
                               console.log("Chosed tag: " + bagOfTags[max])
-                              response.write(data.responses[Math.floor(Math.random() * data.responses.length)]);
+                              if (data.path) {
+                                  let predicate = require("./intents/" + data.path);
+                                  response.write(predicate.run());
+                              } else {
+                                response.write(data.responses[Math.floor(Math.random() * data.responses.length)]);
+                              }
                               return;
                          }
                     });
