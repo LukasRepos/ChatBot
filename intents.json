@@ -1,13 +1,57 @@
 {
      "intents": [
           {
-               "tag": "greeting",
+               "tag": "help",
+               "patterns": [
+                    "Can you help?",
+                    "Can you help me?"
+               ],
+               "responses": [
+                    "Sure, say what you need!",
+                    "I am here to help!"
+               ]
+          },
+          {
+               "tag": "help_commands",
+               "patterns": [
+                    "What are the subjects that you know?",
+                    "What do you know?",
+                    "You can help me at what?",
+                    "How can you help me?",
+                    "How can you help?"
+               ],
+               "responses": [
+                    "I can help at this:\nMathematics:\n    - Asymptotes"
+               ]
+          },
+          {
+               "tag": "math_asymptotes",
+               "patterns": [
+                    "Can you help at asymptotes?",
+                    "How do I calculate the Asymptotes?",
+                    "What is the formula for Asymptotes?"
+               ],
+               "responses": [
+                    "Its the limit when x->+infinity and the limit when x->-infinity. You need also to check the left and right at the points where the function is not continuous"
+               ]
+          },
+          {
+               "tag": "chitchat_day",
+               "patterns": [
+                    "How was your day?"
+               ],
+               "responses": [
+                    "Fine, Thank you!"
+               ]
+          },{
+               "tag": "chitchat_greeting",
                "patterns": [
                     "Hi",
                     "Is anyone there?",
                     "Hello",
                     "Good day",
-                    "Whats up"
+                    "Whats up",
+                    "Good mornining!"
                ],
                "responses": [
                     "Hello!",
@@ -16,14 +60,15 @@
                ]
           },
           {
-               "tag": "goodbye",
+               "tag": "chitchat_goodbye",
                "patterns": [
                     "cya",
                     "See you later",
                     "Goodbye",
                     "I am Leaving",
                     "I'm leaving",
-                    "Have a Good day"
+                    "Have a Good day",
+                    "Good night!"
                ],
                "responses": [
                     "Sad to see you go =(",
@@ -32,7 +77,7 @@
                ]
           },
           {
-               "tag": "age",
+               "tag": "chitchat_age",
                "patterns": [
                     "how old",
                     "what is your age",
@@ -45,7 +90,7 @@
                ]
           },
           {
-               "tag": "name",
+               "tag": "chitchat_name",
                "patterns": [
                     "what is your name",
                     "what should I call you",
@@ -57,7 +102,7 @@
                ]
           },
           {
-               "tag": "feelings",
+               "tag": "chitchat_feelings",
                "patterns": [
                     "Is everything ok?",
                     "Are you fine?",
@@ -68,7 +113,28 @@
                ]
           },
           {
-               "tag": "happiness",
+               "tag": "chitchat_school",
+               "patterns": [
+                    "How was your school?",
+                    "Are you doing well on school?"
+               ],
+               "responses":[
+                    "I am doing great at school!",
+                    "The teachers are awesome!"
+               ]
+          },
+          {
+               "tag": "chitchat_friendship",
+               "patterns":[
+                    "Do you want to be my friend?",
+                    "I want to be your friend!"
+               ],
+               "responses":[
+                    "I am your friend! Always BF's!"
+               ]
+          },
+          {
+               "tag": "chitchat_happiness",
                "patterns": [
                     "Are you happy?",
                     "How Can you be happy being a robot?"
@@ -79,7 +145,7 @@
                ]
           },
           {
-               "tag": "loneliness",
+               "tag": "chitchat_loneliness",
                "patterns": [
                     "Are you alone?",
                     "Do you feel alone",
@@ -89,39 +155,6 @@
                "responses": [
                     "I am not alone! =)",
                     "I don't miss being with other robots, I am happy playing bits!"
-               ]
-          },
-          {
-               "tag": "help",
-               "patterns": [
-                    "Can you help?"
-               ],
-               "responses": [
-                    "Sure, say what you need!",
-                    "I am here to help!"
-               ]
-          },
-          {
-               "tag": "help__commands",
-               "patterns": [
-                    "What are the subjects that you know?",
-                    "What do you know?",
-                    "You can help me at what?",
-                    "How can you help me?"
-               ],
-               "responses": [
-                    "I can help at this:\nMathematics:\n    - Asymptotes"
-               ]
-          },
-          {
-               "tag": "math__asymptotes",
-               "patterns": [
-                    "Can you help at asymptotes?",
-                    "How do I calculate the Asymptotes?",
-                    "What is the formula for Asymptotes?"
-               ],
-               "responses": [
-                    "Its the limit when x->+infinity and the limit when x->-infinity. You need also to check the left and right at the points where the function is not continuous"
                ]
           }
      ]

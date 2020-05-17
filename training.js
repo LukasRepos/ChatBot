@@ -64,14 +64,24 @@ processedData.forEach(data => {
 
 const net = new brain.NeuralNetwork({
      activation: 'sigmoid', // activation function
-     hiddenLayers: [ Math.trunc((bagOfTags.length + bagOfWords.length) / 2) ]
+     hiddenLayers: [ 30 ]
 });
 
+let totalIterations = 10000000;
+let startTime = (new Date()).getTime();
+let currentIteration = 0
 net.train(trainingData, {
-     log: true,
-     logPeriod: 5000,
-     iterations: 2000000,
+     iterations: totalIterations,
      errorThresh: 0.005,
+     callbackPeriod: totalIterations / 100,
+     logPeriod: totalIterations / 100,
+     log: true,
+     callback: () => {
+          currentIteration += totalIterations / 100;
+          currentTime = (new Date()).getTime();
+          console.log("ETA: " + ((currentTime - startTime) / 1000) * (100 - (100 * currentIteration / totalIterations)));
+          startTime = currentTime;
+     }
 });
 
 const model = JSON.stringify(net.toJSON());

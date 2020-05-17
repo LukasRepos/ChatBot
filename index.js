@@ -46,7 +46,7 @@ processedData.forEach(data => {
 });
 
 const net = new brain.NeuralNetwork({
-     hiddenLayers: [ Math.trunc((bagOfTags.length + bagOfWords.length) / 2) ],
+     hiddenLayers: [ 30 ],
      activation: 'sigmoid'
 });
 
@@ -79,9 +79,11 @@ const server = http.createServer((request, response) => {
                }
 
                console.log(netResult);
-               if (netResult[max] > 0.75) {
+               if (netResult[max] > 0.70) {
                     processedData.forEach(data => {
                          if (data.tag == bagOfTags[max]) {
+                              console.log("Choosed: " + max);
+                              console.log("Chosed tag: " + bagOfTags[max])
                               response.write(data.responses[Math.floor(Math.random() * data.responses.length)]);
                               return;
                          }
