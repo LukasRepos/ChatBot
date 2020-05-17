@@ -156,6 +156,13 @@
                     "I am not alone! =)",
                     "I don't miss being with other robots, I am happy playing bits!"
                ]
+          },
+          {
+            "tag": "chitchat_time",
+            "path": "time",
+            "patterns": [
+                "What time is it?"
+            ]
           }
      ]
 }
