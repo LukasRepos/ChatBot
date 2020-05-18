@@ -67,7 +67,7 @@ const net = new brain.NeuralNetwork({
      hiddenLayers: [ 30 ]
 });
 
-let totalIterations = 10000000;
+let totalIterations = 200000;
 let startTime = (new Date()).getTime();
 let currentIteration = 0
 net.train(trainingData, {

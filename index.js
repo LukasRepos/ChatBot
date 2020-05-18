@@ -18,6 +18,7 @@ rawData.intents.forEach(element => {
 
      processedData.push({
           tag: element.tag,
+          path: element.path,
           responses: element.responses,
           patterns: patterns
      })
@@ -46,7 +47,7 @@ processedData.forEach(data => {
 });
 
 const net = new brain.NeuralNetwork({
-     hiddenLayers: [ 30 ],
+     hiddenLayers: [30],
      activation: 'sigmoid'
 });
 
@@ -83,12 +84,14 @@ const server = http.createServer((request, response) => {
                     processedData.forEach(data => {
                          if (data.tag == bagOfTags[max]) {
                               console.log("Choosed: " + max);
-                              console.log("Chosed tag: " + bagOfTags[max])
-                              if (data.path) {
-                                  let predicate = require("./intents/" + data.path);
-                                  response.write(predicate.run());
+                              console.log("Chosed tag: " + bagOfTags[max]);
+                              console.log(data);
+                              console.log(processedBody);
+                              if (data.path != undefined) {
+                                   let predicate = require("./intents/" + data.path);
+                                   response.write(predicate.run());
                               } else {
-                                response.write(data.responses[Math.floor(Math.random() * data.responses.length)]);
+                                   response.write(data.responses[Math.floor(Math.random() * data.responses.length)]);
                               }
                               return;
                          }
