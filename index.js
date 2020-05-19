@@ -9,13 +9,16 @@ const path = require('path');
 const natural = require('natural');
 const stemmer = natural.PorterStemmer;
 
-let backgroundProcesses = [
-     require('./processes/news').run()
-];
-Promise.all(backgroundProcesses);
-
 const rawData = JSON.parse(fs.readFileSync(path.resolve('./intents.json'), 'utf8'));
 const processedData = [];
+
+const processes = [
+     require('./processes/news'),
+];
+
+processes.forEach(process => {
+     process.run();
+});
 
 // tokenize and stem all the patterns
 rawData.intents.forEach(element => {
@@ -118,3 +121,4 @@ const server = http.createServer((request, response) => {
 });
 
 server.listen(process.env.PORT || 5000);
+console.log("Listening at port " + (process.env.PORT || 5000));
