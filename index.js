@@ -1,9 +1,18 @@
+if (!process.env.NODE_ENV) {
+     process.env.NODE_ENV = 'development'
+}
+
 const brain = require('brain.js');
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const natural = require('natural');
 const stemmer = natural.PorterStemmer;
+
+let backgroundProcesses = [
+     require('./processes/news').run()
+];
+Promise.all(backgroundProcesses);
 
 const rawData = JSON.parse(fs.readFileSync(path.resolve('./intents.json'), 'utf8'));
 const processedData = [];
@@ -79,14 +88,17 @@ const server = http.createServer((request, response) => {
                     }
                }
 
-               console.log(netResult);
+               if (process.env.NODE_ENV === 'development') {
+                    console.log("Network results:");
+                    console.log(netResult);
+               }
                if (netResult[max] > 0.70) {
                     processedData.forEach(data => {
                          if (data.tag == bagOfTags[max]) {
-                              console.log("Choosed: " + max);
-                              console.log("Chosed tag: " + bagOfTags[max]);
-                              console.log(data);
-                              console.log(processedBody);
+                              if (process.env.NODE_ENV === 'development') {
+                                   console.log("Choosed: " + max);
+                                   console.log("Chosed tag: " + bagOfTags[max]);
+                              }
                               if (data.path != undefined) {
                                    let predicate = require("./intents/" + data.path);
                                    response.write(predicate.run());
