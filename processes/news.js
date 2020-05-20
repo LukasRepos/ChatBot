@@ -16,7 +16,7 @@ module.exports = {
           storyData = tmpData;
           console.log("Done fectching news");
 
-          setTimeout(this.run, 60000);
+          setTimeout(this.run.bind(this), 60000);
      },
      getStories: () => {
           return storyData;
