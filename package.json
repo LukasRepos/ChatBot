@@ -12,7 +12,8 @@
   "dependencies": {
     "axios": "^0.19.2",
     "brain.js": "^2.0.0-alpha.12",
-    "natural": "^2.1.5",
-    "nlp": "0.0.0"
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.9.15",
+    "natural": "^2.1.5"
   }
 }

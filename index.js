@@ -9,11 +9,14 @@ const path = require('path');
 const natural = require('natural');
 const stemmer = natural.PorterStemmer;
 
+require('dotenv').config();
+
 const rawData = JSON.parse(fs.readFileSync(path.resolve('./intents.json'), 'utf8'));
 const processedData = [];
 
 const processes = [
      require('./processes/news'),
+     require('./processes/database'),
 ];
 
 processes.forEach(process => {

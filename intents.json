@@ -168,7 +168,10 @@
                "tag": "news_request",
                "path": "news",
                "patterns": [
-                    "Tell me the news for today."
+                    "Tell me the news for today.",
+                    "What are the news for today?",
+                    "What are the news?",
+                    "Tell me the news!"
                ]
           }
      ]

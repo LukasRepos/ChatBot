@@ -1,6 +1,5 @@
 const brain = require('brain.js');
 const fs = require('fs');
-const http = require('http');
 const path = require('path');
 const natural = require('natural');
 const stemmer = natural.PorterStemmer;
@@ -67,12 +66,12 @@ const net = new brain.NeuralNetwork({
      hiddenLayers: [ 30 ]
 });
 
-let totalIterations = 200000;
+let totalIterations = 10000000;
 let startTime = (new Date()).getTime();
 let currentIteration = 0
 net.train(trainingData, {
      iterations: totalIterations,
-     errorThresh: 0.005,
+     errorThresh: 0.0005,
      callbackPeriod: totalIterations / 100,
      logPeriod: totalIterations / 100,
      log: true,
@@ -83,6 +82,6 @@ net.train(trainingData, {
           startTime = currentTime;
      }
 });
-
+console.log("Finished");
 const model = JSON.stringify(net.toJSON());
 fs.writeFileSync(path.resolve("./model.json"), model);
